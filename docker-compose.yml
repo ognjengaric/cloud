@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  webapp:
+    build: ./cloud-app
+    networks:
+      - new
+    depends_on: 
+      - db 
+    restart: on-failure
+  db:
+    image: mysql:latest
+    environment: 
+    - MYSQL_DATABASE=CloudApp
+    - MYSQL_ROOT_PASSWORD=myPass
+    - MYSQL_USER=user1
+    - MYSQL_PASSWORD=user1
+    networks:
+      - new
+networks:
+  new:
