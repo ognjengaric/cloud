@@ -2,6 +2,8 @@ version: '3.8'
 services:
   webapp:
     build: ./cloud-app
+    ports:
+    - "8080:80"
     networks:
       - new
     depends_on: 
