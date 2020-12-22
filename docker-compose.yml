@@ -18,5 +18,9 @@ services:
     - MYSQL_PASSWORD=user1
     networks:
       - new
+        volumes:
+      - dbdata:/var/lib/mysql
 networks:
   new:
+volumes:
+  dbdata:
