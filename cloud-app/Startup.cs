@@ -24,9 +24,11 @@ namespace cloud_app
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   
+            var connection = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+
             services.AddDbContext<ApplicationContext>
-                (options => options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+                (options => options.UseMySQL(connection));
                 
             services.AddControllers();
         }

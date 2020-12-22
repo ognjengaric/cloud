@@ -13,6 +13,8 @@ services:
     depends_on: 
       - db 
     restart: on-failure
+    environment:
+    - CONNECTION_STRING=Server=db;Database=CloudApp;Uid=user1;Pwd=user1; 
   db:
     image: mysql:latest
     environment: 
