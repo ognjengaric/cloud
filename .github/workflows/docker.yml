@@ -31,7 +31,7 @@ jobs:
           context: ./cloud-app
           file: ./cloud-app/Dockerfile
           push: true
-          tags: ognjengari/cloud:latest
+          tags: ognjengaric/cloud:latest
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
