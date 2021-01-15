@@ -34,7 +34,10 @@ namespace cloud_app.Controllers
 
                 _applicationContext.SaveChanges();
 
-                return Ok(_applicationContext.Data);
+                var data = _applicationContext.Data.FirstOrDefault();
+                data.Host = Environment.GetEnvironmentVariable("HOST");
+
+                return Ok(data);
             }
     }
 }

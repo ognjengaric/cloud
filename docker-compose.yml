@@ -6,16 +6,29 @@ services:
     - "8080:80"
     networks:
       - new
-  webapp:
+  webapp1:
+    container_name: webapp1
     build: ./cloud-app
     networks:
       - new
     depends_on: 
-      - db 
+      - db1
     restart: on-failure
     environment:
-    - CONNECTION_STRING=Server=db;Database=CloudApp;Uid=user1;Pwd=user1; 
-  db:
+    - CONNECTION_STRING=Server=db1;Database=CloudApp;Uid=user1;Pwd=user1;
+    - HOST=webapp1
+  webapp2:
+    container_name: webapp2
+    build: ./cloud-app
+    networks:
+      - new
+    depends_on: 
+      - db2
+    restart: on-failure
+    environment:
+    - CONNECTION_STRING=Server=db2;Database=CloudApp;Uid=user1;Pwd=user1;
+    - HOST=webapp2 
+  db1:
     image: mysql:latest
     environment: 
     - MYSQL_DATABASE=CloudApp
@@ -25,7 +38,18 @@ services:
     networks:
       - new
     volumes:
-      - dbdata:/var/lib/mysql
+      - dbdata:/var/lib/mysql1
+  db2:
+    image: mysql:latest
+    environment: 
+    - MYSQL_DATABASE=CloudApp
+    - MYSQL_ROOT_PASSWORD=myPass
+    - MYSQL_USER=user1
+    - MYSQL_PASSWORD=user1
+    networks:
+      - new
+    volumes:
+      - dbdata:/var/lib/mysql2    
 networks:
   new:
 volumes:
